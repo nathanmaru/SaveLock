@@ -5,6 +5,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
+using Android.Support.V7.Widget;
 using Google.Android.Material.BottomNavigation;
 using ShareLockRevamp.Activities.Extenders;
 using ShareLockRevamp.Adapters;
@@ -12,19 +13,22 @@ using ShareLockRevamp.EventListeners;
 using ShareLockRevamp.Models;
 using System;
 using System.Collections.Generic;
+using Android.Support.V7.RecyclerView;
+using ShareLockRevamp.Fragments;
 
 namespace ShareLockRevamp
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         //Header
         TextView textMessage;
 
         //Home
-        public static RecyclerView doorLockRecyle;
+        public static AndroidX.RecyclerView.Widget.RecyclerView doorLockRecyle;
         public static LinearLayout HomePage;
-        
+        public static ImageView addDoorLockBtn;
+        AddDoorLockFragment addDoorLockFragment;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,6 +43,11 @@ namespace ShareLockRevamp
             HomeExtenders.ShowHomeLayout();
             HomeExtenders.RetrieveData();
 
+            AddDoorLockFragment addDoorLockFragment = new AddDoorLockFragment();
+            var trans = SupportFragmentManager.BeginTransaction();
+            addDoorLockFragment.Show(trans, "new member");
+
+
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
         }
@@ -46,9 +55,16 @@ namespace ShareLockRevamp
         private void ConnectHomeViews()
         {
             HomePage = (LinearLayout)FindViewById(Resource.Id.HomeLayout);
-            doorLockRecyle = (RecyclerView)FindViewById(Resource.Id.doorlocksRecyclerView);
-            
-            
+            doorLockRecyle = (AndroidX.RecyclerView.Widget.RecyclerView)FindViewById(Resource.Id.doorlocksRecyclerView);
+            addDoorLockBtn = (ImageView)FindViewById(Resource.Id.addDoorLock);
+            addDoorLockBtn.Click += AddDoorLockBtn_Click;
+        }
+
+        private void AddDoorLockBtn_Click(object sender, EventArgs e)
+        {
+            addDoorLockFragment = new AddDoorLockFragment();
+            var trans = SupportFragmentManager.BeginTransaction();
+            addDoorLockFragment.Show(trans, "new door lock");
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

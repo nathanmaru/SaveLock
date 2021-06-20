@@ -14,7 +14,7 @@ using System.Text;
 
 namespace ShareLockRevamp.Activities
 {
-    [Activity(Label = "LoginActivity")]
+    [Activity(Label = "LoginActivity", MainLauncher =true)]
     public class LoginActivity : Activity
     {
         EditText username;
