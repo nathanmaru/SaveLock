@@ -68,8 +68,11 @@
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\SignUpActivity.cs" />
     <Compile Include="Adapters\DoorLockAdapter.cs" />
+    <Compile Include="Adapters\RequestAdapter.cs" />
+    <Compile Include="Adapters\YourVisitsAdapter.cs" />
     <Compile Include="EventListeners\AccountListener.cs" />
     <Compile Include="EventListeners\DoorLockListener.cs" />
+    <Compile Include="EventListeners\RequestListener.cs" />
     <Compile Include="Fragments\AddDoorLockFragment.cs" />
     <Compile Include="Fragments\EditDoorLockFragment.cs" />
     <Compile Include="Helpers\AppDataHelper.cs" />
@@ -77,6 +80,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\DoorLock.cs" />
     <Compile Include="Models\DoorLockClick.cs" />
+    <Compile Include="Models\Request.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -173,6 +177,14 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\EditDoorLock.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\RequestItem.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\YourVisitsItem.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
