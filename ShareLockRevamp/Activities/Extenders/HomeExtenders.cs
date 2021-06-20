@@ -14,6 +14,8 @@ using System.Text;
 using ShareLockRevamp;
 using ShareLockRevamp.Fragments;
 using Fragment = Android.Support.V4.App.Fragment;
+using Android.Content;
+using ShareLockRevamp.Helpers;
 
 namespace ShareLockRevamp.Activities.Extenders
 {
@@ -22,12 +24,14 @@ namespace ShareLockRevamp.Activities.Extenders
 
         public static List<DoorLock> doorLockList;
         public static List<DoorLock> filterdoorLockList;
-        
+        DoorLock thisDoorLock;
+        DoorLockListener DoorLockListener;
 
         public static void ShowHomeLayout()
         {
             MainActivity.HomePage.Visibility = Android.Views.ViewStates.Visible;
-            
+            MainActivity.EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
+
         }
 
         
@@ -67,10 +71,19 @@ namespace ShareLockRevamp.Activities.Extenders
 
         private void DoorLockAdapter_ItemClick(object sender, DoorLockAdapterClickEventArgs e)
         {
-            DoorLock thisDoorLock = filterdoorLockList[e.Position];
-            EditDoorLockFragment editDoorLockFragment = new EditDoorLockFragment(thisDoorLock);
-            var trans = SupportFragmentManager.BeginTransaction();
-            editDoorLockFragment.Show(trans, "edit");
+            DoorLockClick.ID = filterdoorLockList[e.Position].ID;
+            MainActivity.doorLockID.Text = filterdoorLockList[e.Position].DoorLockId;
+            MainActivity.doorLockName.Text = filterdoorLockList[e.Position].DoorLockName;
+            MainActivity.doorpassword.Text= filterdoorLockList[e.Position].Password;
+            MainActivity.address.Text = filterdoorLockList[e.Position].Address;
+            MainActivity.username.Text = filterdoorLockList[e.Position].FamilyName;
+
+            MainActivity.EditDoorLayout.Visibility = Android.Views.ViewStates.Visible;
+            MainActivity.HomePage.Visibility = Android.Views.ViewStates.Gone;
         }
+
+        
+
+        
     }
 }

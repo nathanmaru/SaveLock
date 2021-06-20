@@ -75,5 +75,10 @@ namespace ShareLockRevamp.EventListeners
             DatabaseReference doorlockRef = AppDataHelper.GetDatabase().GetReference("doorLockInfo");
             doorlockRef.AddValueEventListener(this);
         }
+        public void DeleteDoorLock(string key)
+        {
+            DatabaseReference reference = AppDataHelper.GetDatabase().GetReference("doorLockInfo/" + key);
+            reference.RemoveValue();
+        }
     }
 }

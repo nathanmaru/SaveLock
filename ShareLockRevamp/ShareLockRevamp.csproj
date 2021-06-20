@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveUser.cs" />
+    <Compile Include="Activities\EditDoorLock.cs" />
     <Compile Include="Activities\Extenders\HomeExtenders.cs" />
     <Compile Include="Activities\GetStartedActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\DoorLock.cs" />
+    <Compile Include="Models\DoorLockClick.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
