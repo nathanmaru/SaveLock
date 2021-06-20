@@ -27,10 +27,10 @@ namespace ShareLockRevamp.Activities.Extenders
         public static void ShowHomeLayout()
         {
             MainActivity.HomePage.Visibility = Android.Views.ViewStates.Visible;
-
             
         }
 
+        
 
         public static void RetrieveData()
         {
@@ -50,17 +50,24 @@ namespace ShareLockRevamp.Activities.Extenders
 
         private static void SetUpDoorLockRecycler()
         {
+            
+            HomeExtenders foo = new HomeExtenders();
+            foo.click();
+            
+        }
+
+        public void click()
+        {
             DoorLockAdapter doorLockAdapter;
             MainActivity.doorLockRecyle.SetLayoutManager(new AndroidX.RecyclerView.Widget.LinearLayoutManager(MainActivity.doorLockRecyle.Context));
             doorLockAdapter = new DoorLockAdapter(filterdoorLockList);
             doorLockAdapter.ItemClick += DoorLockAdapter_ItemClick;
             MainActivity.doorLockRecyle.SetAdapter(doorLockAdapter);
-
         }
 
-        private static void DoorLockAdapter_ItemClick(object sender, DoorLockAdapterClickEventArgs e)
+        private void DoorLockAdapter_ItemClick(object sender, DoorLockAdapterClickEventArgs e)
         {
-            DoorLock thisDoorLock = doorLockList[e.Position];
+            DoorLock thisDoorLock = filterdoorLockList[e.Position];
             EditDoorLockFragment editDoorLockFragment = new EditDoorLockFragment(thisDoorLock);
             var trans = SupportFragmentManager.BeginTransaction();
             editDoorLockFragment.Show(trans, "edit");

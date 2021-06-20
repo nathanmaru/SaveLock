@@ -43,11 +43,6 @@ namespace ShareLockRevamp
             HomeExtenders.ShowHomeLayout();
             HomeExtenders.RetrieveData();
 
-            AddDoorLockFragment addDoorLockFragment = new AddDoorLockFragment();
-            var trans = SupportFragmentManager.BeginTransaction();
-            addDoorLockFragment.Show(trans, "new member");
-
-
             BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             navigation.SetOnNavigationItemSelectedListener(this);
         }
