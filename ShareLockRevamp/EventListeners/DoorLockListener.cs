@@ -16,12 +16,12 @@ namespace ShareLockRevamp.EventListeners
 {
     public class DoorLockListener : Java.Lang.Object, IValueEventListener
     {
-        /*List<DoorLock> doorLockList = new List<DoorLock>();
+        List<DoorLock> doorLockList = new List<DoorLock>();
         public event EventHandler<DoorLockDataEventArgs> DoorLockRetrived;
         public class DoorLockDataEventArgs : EventArgs
         {
             public List<DoorLock> DoorLock { get; set; }
-        }*/
+        }
         List<DoorLock> filterdoorLockList = new List<DoorLock>();
         public event EventHandler<FilterDoorLockDataEventArgs> FilterDoorLockRetrived;
         public class FilterDoorLockDataEventArgs : EventArgs
@@ -42,7 +42,7 @@ namespace ShareLockRevamp.EventListeners
                 filterdoorLockList.Clear();
                 foreach (DataSnapshot memberData in child)
                 {
-                    /*DoorLock doorLock = new DoorLock();
+                    DoorLock doorLock = new DoorLock();
                     doorLock.ID = memberData.Key;
                     doorLock.DoorLockId = memberData.Child("Key").Value.ToString();
                     doorLock.DoorLockName = memberData.Child("DoorName").Value.ToString();
@@ -51,7 +51,7 @@ namespace ShareLockRevamp.EventListeners
                     doorLock.FamilyName = memberData.Child("FamilyName").Value.ToString();
                     doorLock.Address = memberData.Child("Address").Value.ToString();
                     doorLock.OneTimePassword = memberData.Child("OTP").Value.ToString();
-                    doorLockList.Add(doorLock);*/
+                    doorLockList.Add(doorLock);
                     if(memberData.Child("Username").Value.ToString() == ActiveUser.Username)
                     {
                         DoorLock filterdoorLock = new DoorLock();
@@ -66,7 +66,7 @@ namespace ShareLockRevamp.EventListeners
                         filterdoorLockList.Add(filterdoorLock);
                     }
                 }
-                //DoorLockRetrived.Invoke(this, new DoorLockDataEventArgs { DoorLock = doorLockList });
+                DoorLockRetrived.Invoke(this, new DoorLockDataEventArgs { DoorLock = doorLockList });
                 FilterDoorLockRetrived.Invoke(this, new FilterDoorLockDataEventArgs { FilterDoorLock = filterdoorLockList });
             }
         }

@@ -3,6 +3,7 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using ShareLockRevamp.Models;
 
 namespace ShareLockRevamp.Adapters
 {
@@ -12,7 +13,7 @@ namespace ShareLockRevamp.Adapters
         public event EventHandler<YourVisitsAdapterClickEventArgs> ItemLongClick;
         List<Request> items;
 
-        public YourVisitsAdapter(string[] data)
+        public YourVisitsAdapter(List<Request> data)
         {
             items = data;
         }
@@ -23,9 +24,8 @@ namespace ShareLockRevamp.Adapters
 
             //Setup your layout here
             View itemView = null;
-            //var id = Resource.Layout.__YOUR_ITEM_HERE;
-            //itemView = LayoutInflater.From(parent.Context).
-            //       Inflate(id, parent, false);
+            var id = Resource.Layout.YourVisitsItem;
+            itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
             var vh = new YourVisitsAdapterViewHolder(itemView, OnClick, OnLongClick);
             return vh;
@@ -38,10 +38,14 @@ namespace ShareLockRevamp.Adapters
 
             // Replace the contents of the view with that element
             var holder = viewHolder as YourVisitsAdapterViewHolder;
-            //holder.TextView.Text = items[position];
+            holder.FamilyName.Text = items[position].FamilyName;
+            holder.DoorLockName.Text = items[position].DoorLockName;
+            holder.RequestDate.Text = items[position].RequestDate;
+            holder.StatusTxt.Text = items[position].Status;
+            holder.Address.Text = items[position].Address;
         }
 
-        public override int ItemCount => items.Length;
+        public override int ItemCount => items.Count;
 
         void OnClick(YourVisitsAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
         void OnLongClick(YourVisitsAdapterClickEventArgs args) => ItemLongClick?.Invoke(this, args);
@@ -51,12 +55,21 @@ namespace ShareLockRevamp.Adapters
     public class YourVisitsAdapterViewHolder : RecyclerView.ViewHolder
     {
         //public TextView TextView { get; set; }
-
+        public TextView FamilyName;
+        public TextView RequestDate;
+        public TextView DoorLockName;
+        public TextView StatusTxt;
+        public TextView Address;
 
         public YourVisitsAdapterViewHolder(View itemView, Action<YourVisitsAdapterClickEventArgs> clickListener,
                             Action<YourVisitsAdapterClickEventArgs> longClickListener) : base(itemView)
         {
             //TextView = v;
+            FamilyName = (TextView)itemView.FindViewById(Resource.Id.familyName);
+            RequestDate = (TextView)itemView.FindViewById(Resource.Id.requestDate);
+            DoorLockName = (TextView)itemView.FindViewById(Resource.Id.DoorLockName);
+            StatusTxt = (TextView)itemView.FindViewById(Resource.Id.statusTxt);
+            Address = (TextView)itemView.FindViewById(Resource.Id.address);
             itemView.Click += (sender, e) => clickListener(new YourVisitsAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new YourVisitsAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
         }

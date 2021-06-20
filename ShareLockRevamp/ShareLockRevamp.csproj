@@ -67,6 +67,7 @@
     <Compile Include="Activities\GetStartedActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\SignUpActivity.cs" />
+    <Compile Include="Adapters\AllDoorLockAdapter.cs" />
     <Compile Include="Adapters\DoorLockAdapter.cs" />
     <Compile Include="Adapters\RequestAdapter.cs" />
     <Compile Include="Adapters\YourVisitsAdapter.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="EventListeners\DoorLockListener.cs" />
     <Compile Include="EventListeners\RequestListener.cs" />
     <Compile Include="Fragments\AddDoorLockFragment.cs" />
+    <Compile Include="Fragments\AddVisitFragment.cs" />
     <Compile Include="Fragments\EditDoorLockFragment.cs" />
     <Compile Include="Helpers\AppDataHelper.cs" />
     <Compile Include="MainActivity.cs" />
@@ -179,10 +181,22 @@
     <AndroidResource Include="Resources\layout\EditDoorLock.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\RequestItem.xml" />
+    <AndroidResource Include="Resources\layout\YourVisitsItem.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\YourVisitsItem.xml">
+    <AndroidResource Include="Resources\layout\AddRequestLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SearchDoorLockLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SearchItem.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

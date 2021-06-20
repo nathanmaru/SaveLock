@@ -20,9 +20,12 @@ namespace ShareLockRevamp.Models
 
         public string DoorLockId { get; set; } ///FK
         public string DoorLockName { get; set; }
+        public string RequestDate { get; set; }
         public string OwnerUsername { get; set; }
-        public string UserID { get; set; } ///FK
-        public string isApprove { get; set; } ///FK
+        public string FamilyName { get; set; }
+        public string Address { get; set; }
+        public string VisitorUsername { get; set; } ///FK
+        public string Status { get; set; } ///FK
         public string OneTimePassword { get; set; } ///FK
 
     }
