@@ -64,16 +64,13 @@
     <Compile Include="ActiveUser.cs" />
     <Compile Include="Activities\EditDoorLock.cs" />
     <Compile Include="Activities\Extenders\HomeExtenders.cs" />
-    <Compile Include="Activities\Extenders\VisitExtenders.cs" />
     <Compile Include="Activities\GetStartedActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\SignUpActivity.cs" />
-    <Compile Include="Adapters\AllDoorLockAdapter.cs" />
+    <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Adapters\DoorLockAdapter.cs" />
-    <Compile Include="Adapters\YourVisitsAdapter.cs" />
     <Compile Include="EventListeners\AccountListener.cs" />
     <Compile Include="EventListeners\DoorLockListener.cs" />
-    <Compile Include="EventListeners\RequestListener.cs" />
     <Compile Include="Fragments\AddDoorLockFragment.cs" />
     <Compile Include="Fragments\AddVisitFragment.cs" />
     <Compile Include="Fragments\EditDoorLockFragment.cs" />
@@ -82,8 +79,6 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\DoorLock.cs" />
     <Compile Include="Models\DoorLockClick.cs" />
-    <Compile Include="Models\Request.cs" />
-    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,7 +102,6 @@
     <AndroidResource Include="Resources\drawable\ic_home_black_24dp.xml" />
     <AndroidResource Include="Resources\drawable\ic_dashboard_black_24dp.xml" />
     <AndroidResource Include="Resources\drawable\ic_notifications_black_24dp.xml" />
-    <AndroidResource Include="Resources\menu\navigation.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
@@ -159,15 +153,6 @@
     <AndroidResource Include="Resources\layout\LoginLayout.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\HomePage.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\PaymentLayout.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\VisitsPage.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\SignUpLayout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -177,26 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\EditDoorLock.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\YourVisitsItem.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\AddRequestLayout.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\SearchDoorLockLayout.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\SearchItem.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\ProfileLayout.xml" />
@@ -236,6 +201,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\illustration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splashScreen.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

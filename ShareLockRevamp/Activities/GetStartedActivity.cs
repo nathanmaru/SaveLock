@@ -19,13 +19,13 @@ namespace ShareLockRevamp.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            SetContentView(Resource.Layout.GetStartedLayout);
             //resets activeusername
             ActiveUser.Username = null;
 
             // Create your application here
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            SetContentView(Resource.Layout.GetStartedLayout);
+            
 
             signUpRedirect = (Button)FindViewById(Resource.Id.getstartedBtn);
             loginRedirect = (TextView)FindViewById(Resource.Id.loginBtn);

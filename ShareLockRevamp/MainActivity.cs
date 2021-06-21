@@ -46,7 +46,7 @@ namespace ShareLockRevamp
         public static Button deleteThis;
         public static LinearLayout EditDoorLayout;
         DoorLockListener DoorLockListener;
-        List<Request> visitList;
+        
 
         //Profile
         ImageView profileBtn;
@@ -61,11 +61,7 @@ namespace ShareLockRevamp
         List<Account> AccountList;
         
 
-        ///VisitsPage
-        public static LinearLayout VisitLayoutPage;
-        VisitExtenders visitExtenders = new VisitExtenders();
-        public AndroidX.RecyclerView.Widget.RecyclerView yourRequests;
-        private object visitLisit;
+        
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
