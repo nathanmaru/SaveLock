@@ -67,29 +67,29 @@ namespace ShareLockRevamp.Activities
         private void LoginBtn_Click(object sender, EventArgs e)
         {
             //Check Text Fields
-            if(username.Text == "" || password.Text == "")
-            {
+            
                 //Check from Existing Account
-                if (CheckExistingAccounts() == 1)
-                {
-                    LogIn();
-                    Toast.MakeText(loginBtn.Context, "Login Success!", ToastLength.Short).Show();
-                    var intent1 = new Intent(this, typeof(MainActivity));
-                    ActiveUser.Username = username.Text;
-                    intent1.PutExtra("userName", username.Text);
-                    //pass username through extras
-                    StartActivity(intent1);
+            if (CheckExistingAccounts() >= 1)
+            {
+                LogIn();
+                Toast.MakeText(loginBtn.Context, "Login Success!", ToastLength.Short).Show();
+                var intent1 = new Intent(this, typeof(MainActivity));
+                ActiveUser.Username = username.Text;
+                intent1.PutExtra("userName", username.Text);
+                //pass username through extras
+                StartActivity(intent1);
 
-                }
-                else
-                {
-                    Toast.MakeText(loginBtn.Context, "Username or Password don't exist!", ToastLength.Short).Show();
-                }
+            }
+            else if(CheckExistingAccounts() == -1)
+            {
+                Toast.MakeText(loginBtn.Context, "Firebase Still Loading!", ToastLength.Short).Show();
             }
             else
             {
-                Toast.MakeText(loginBtn.Context, "Don't Leave Fields Empty", ToastLength.Short).Show();
+                Toast.MakeText(loginBtn.Context, "Username or Password don't exist!", ToastLength.Short).Show();
             }
+            
+            
             
             
         }
@@ -106,7 +106,7 @@ namespace ShareLockRevamp.Activities
             }
             catch (ArgumentNullException ex)
             {
-                return 0;
+                return -1;
             }
 
 

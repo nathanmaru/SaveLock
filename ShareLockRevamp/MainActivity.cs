@@ -68,7 +68,7 @@ namespace ShareLockRevamp
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-
+            CheckIfLogIn();
            
             //Header
             textMessage = FindViewById<TextView>(Resource.Id.message);
@@ -83,8 +83,20 @@ namespace ShareLockRevamp
 
         }
 
+        public void CheckIfLogIn()
+        {
+            if (ActiveUser.Username == null || ActiveUser.Username == "")
+            {
+                var intent1 = new Intent(this, typeof(LoginActivity));
+                ActiveUser.Username = null;
+
+                StartActivity(intent1);
+            }
+        }
+
         private void RetrieveProfile()
         {
+            CheckIfLogIn();
             AccountListener accountListener = new AccountListener();
             accountListener.Create();
             accountListener.AccountRetrived += AccountListener_AccountRetrived;
@@ -102,6 +114,7 @@ namespace ShareLockRevamp
 
         private void ConnectProfileViews()
         {
+            CheckIfLogIn();
             profileBtn = (ImageView)FindViewById(Resource.Id.profileBtn);
             profile = (LinearLayout)FindViewById(Resource.Id.profileLayout);
             fullname = (EditText)FindViewById(Resource.Id.fullnameTxt);
@@ -123,7 +136,6 @@ namespace ShareLockRevamp
         {
             var intent1 = new Intent(this, typeof(LoginActivity));
             ActiveUser.Username = null;
-            
             StartActivity(intent1);
         }
 
@@ -171,6 +183,7 @@ namespace ShareLockRevamp
 
         private void ConnectEditViews()
         {
+            CheckIfLogIn();
             EditDoorLayout = (LinearLayout)FindViewById(Resource.Id.EditDoorLayout);
             doorLockID = (EditText)FindViewById(Resource.Id.doorLockId);
             doorLockName = (EditText)FindViewById(Resource.Id.doorlockName);
@@ -237,6 +250,7 @@ namespace ShareLockRevamp
 
         private void ConnectHomeViews()
         {
+            CheckIfLogIn();
             HomePage = (LinearLayout)FindViewById(Resource.Id.homeLayout);
             doorLockRecyle = (AndroidX.RecyclerView.Widget.RecyclerView)FindViewById(Resource.Id.doorLockRecycler);
             addDoorLockBtn = (ImageView)FindViewById(Resource.Id.add);

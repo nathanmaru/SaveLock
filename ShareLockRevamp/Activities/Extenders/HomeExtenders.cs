@@ -26,9 +26,11 @@ namespace ShareLockRevamp.Activities.Extenders
         public static List<DoorLock> filterdoorLockList;
         DoorLock thisDoorLock;
         DoorLockListener DoorLockListener;
+        
 
         public static void ShowHomeLayout()
         {
+            
             MainActivity.HomePage.Visibility = Android.Views.ViewStates.Visible;
             //MainActivity.EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
             //MainActivity.VisitLayoutPage.Visibility = Android.Views.ViewStates.Gone;
