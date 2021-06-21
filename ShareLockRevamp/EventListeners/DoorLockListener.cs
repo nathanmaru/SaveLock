@@ -66,7 +66,7 @@ namespace ShareLockRevamp.EventListeners
                         filterdoorLockList.Add(filterdoorLock);
                     }
                 }
-                DoorLockRetrived.Invoke(this, new DoorLockDataEventArgs { DoorLock = doorLockList });
+                //DoorLockRetrived.Invoke(this, new DoorLockDataEventArgs { DoorLock = doorLockList });
                 FilterDoorLockRetrived.Invoke(this, new FilterDoorLockDataEventArgs { FilterDoorLock = filterdoorLockList });
             }
         }

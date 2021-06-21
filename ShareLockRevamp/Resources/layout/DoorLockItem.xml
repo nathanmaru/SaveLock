@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:background="@drawable/myroundedcorners"
     android:layout_width="match_parent"
+    android:padding="15dp"
     android:layout_height="wrap_content">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout1"
-        android:orientation="horizontal">
-        <ImageView
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:minHeight="80dp"
-            android:id="@+id/imageView1" />
+        android:id="@+id/relativeLayout1" >
         <TextView
             android:text="DoorLock Name"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/doorNameTxt" />
-    </LinearLayout>
-
-    
-    
-
-
+            android:textColor="#38A3DC"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/DoorLockName" />
+        
+        <ImageView
+            android:src="@drawable/deletebutton"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/deleteBtn" />
+    </RelativeLayout>
+    <TextView
+        android:text="Address"
+        android:textColor="#38A3DC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addressTxt" />
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:background="#38A3DC"
+        android:layout_height="1dp"/>
 </LinearLayout>

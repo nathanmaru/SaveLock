@@ -12,6 +12,7 @@ namespace ShareLockRevamp.Adapters
     {
         public event EventHandler<DoorLockAdapterClickEventArgs> ItemClick;
         public event EventHandler<DoorLockAdapterClickEventArgs> ItemLongClick;
+        public event EventHandler<DoorLockAdapterClickEventArgs> DeleteClick;
         List<DoorLock> items;
 
         public DoorLockAdapter(List<DoorLock> data)
@@ -40,6 +41,7 @@ namespace ShareLockRevamp.Adapters
             // Replace the contents of the view with that element
             var holder = viewHolder as DoorLockAdapterViewHolder;
             holder.DoorLockName.Text = items[position].DoorLockName;
+            holder.Address.Text = items[position].Address;
         }
 
         public override int ItemCount => items.Count;
@@ -53,12 +55,14 @@ namespace ShareLockRevamp.Adapters
     {
         //public TextView TextView { get; set; }
         public TextView DoorLockName;
+        public TextView Address;
 
         public DoorLockAdapterViewHolder(View itemView, Action<DoorLockAdapterClickEventArgs> clickListener,
                             Action<DoorLockAdapterClickEventArgs> longClickListener) : base(itemView)
         {
             //TextView = v;
-            DoorLockName = (TextView)itemView.FindViewById(Resource.Id.doorNameTxt);
+            DoorLockName = (TextView)itemView.FindViewById(Resource.Id.DoorLockName);
+            Address = (TextView)itemView.FindViewById(Resource.Id.addressTxt);
             itemView.Click += (sender, e) => clickListener(new DoorLockAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new DoorLockAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
         }

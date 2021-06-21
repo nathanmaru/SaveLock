@@ -76,6 +76,13 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:id="@+id/statusTxt" />
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/deleteRequest" />
+
 
     </RelativeLayout>
 

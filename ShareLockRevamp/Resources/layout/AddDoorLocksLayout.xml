@@ -9,24 +9,32 @@
         android:text="Add DoorLock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#38A3DC"
         android:textSize="25sp"
         android:gravity="center"
         android:id="@+id/textView1" /> 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:textSize="20sp"
         android:hint="Enter Door Lock ID"
         android:id="@+id/doorLockId"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:textSize="20sp"
         android:hint="Enter Door Lock Name"
         android:id="@+id/doorLockName"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:textSize="20sp"
         android:inputType="textPassword"
         android:hint="Enter Door Password"
@@ -35,19 +43,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:hint="Enter Address"
         android:id="@+id/doorLockAddress"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:hint="Enter Family/Owner Name"
         android:id="@+id/familyOwner"/>
     <Button
         android:text="Add Door Lock"
         android:layout_width="200dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/accentedbutton"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_gravity="center"

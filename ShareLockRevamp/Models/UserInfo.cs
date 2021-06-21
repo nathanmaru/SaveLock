@@ -9,15 +9,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ShareLockRevamp
+namespace ShareLockRevamp.Models
 {
-    public class ActiveUser
+    public class UserInfo
     {
         public static string Username { get; set; }
-        public static string ID { get; set; }
-        public static string Fullname { get; set; }
-        
-        public static string Email { get; set; }
-        public static string Password { get; set; }
+        public string ID { get; set; }
+        public string Fullname { get; set; }
+
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

@@ -74,7 +74,7 @@ namespace ShareLockRevamp.EventListeners
                     }
                     
                 }
-                RequestRetrived.Invoke(this, new RequestDataEventArgs { Request = requestList });
+                //RequestRetrived.Invoke(this, new RequestDataEventArgs { Request = requestList });
                 VisitsRetrived.Invoke(this, new VisitsDataEventArgs { Visit = visitList });
             }
         }

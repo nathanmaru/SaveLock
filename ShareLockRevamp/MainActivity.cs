@@ -19,12 +19,14 @@ using Android.Content;
 using ShareLockRevamp.Activities;
 using ShareLockRevamp.Helpers;
 using Firebase.Database;
+using System.Linq;
 
 namespace ShareLockRevamp
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
-    public class MainActivity : AppCompatActivity, BottomNavigationView.IOnNavigationItemSelectedListener
+    public class MainActivity : AppCompatActivity
     {
+        
         //Header
         TextView textMessage;
 
@@ -33,8 +35,8 @@ namespace ShareLockRevamp
         public static LinearLayout HomePage;
         public static ImageView addDoorLockBtn;
         AddDoorLockFragment addDoorLockFragment;
-
-        //EditDoorLockFragment editDoorLockFragment;
+        
+        //EditDoor
         public static EditText doorLockID;
         public static EditText doorLockName;
         public static EditText doorpassword;
@@ -44,6 +46,26 @@ namespace ShareLockRevamp
         public static Button deleteThis;
         public static LinearLayout EditDoorLayout;
         DoorLockListener DoorLockListener;
+        List<Request> visitList;
+
+        //Profile
+        ImageView profileBtn;
+        LinearLayout profile;
+        EditText fullname;
+        EditText usernametxt;
+        EditText email;
+        EditText password;
+        Button edit;
+        Button logout;
+        ImageView back;
+        List<Account> AccountList;
+        
+
+        ///VisitsPage
+        public static LinearLayout VisitLayoutPage;
+        VisitExtenders visitExtenders = new VisitExtenders();
+        public AndroidX.RecyclerView.Widget.RecyclerView yourRequests;
+        private object visitLisit;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -57,13 +79,98 @@ namespace ShareLockRevamp
 
             ConnectHomeViews();
             ConnectEditViews();
+            ConnectProfileViews();
+            
+            
             HomeExtenders.ShowHomeLayout();
             HomeExtenders.RetrieveData();
 
+        }
+
+        private void RetrieveProfile()
+        {
+            AccountListener accountListener = new AccountListener();
+            accountListener.Create();
+            accountListener.AccountRetrived += AccountListener_AccountRetrived;
+            
+        }
+
+        private void AccountListener_AccountRetrived(object sender, AccountListener.AccountDataEventArgs e)
+        {
+            AccountList = e.Account;
+            fullname.Text = ActiveUser.Fullname;
+            usernametxt.Text = ActiveUser.Username;
+            email.Text = ActiveUser.Email;
+            password.Text = ActiveUser.Password;
+        }
+
+        private void ConnectProfileViews()
+        {
+            profileBtn = (ImageView)FindViewById(Resource.Id.profileBtn);
+            profile = (LinearLayout)FindViewById(Resource.Id.profileLayout);
+            fullname = (EditText)FindViewById(Resource.Id.fullnameTxt);
+            usernametxt = (EditText)FindViewById(Resource.Id.username);
+            email = (EditText)FindViewById(Resource.Id.emailText);
+            password = (EditText)FindViewById(Resource.Id.passwordTxt);
+
+            edit = (Button)FindViewById(Resource.Id.saveEditBtn);
+            logout = (Button)FindViewById(Resource.Id.logoutBtn);
+            back = (ImageView)FindViewById(Resource.Id.back);
+
+            back.Click += Back_Click;
+            edit.Click += Edit_Click;
+            profileBtn.Click += ProfileBtn_Click;
+            logout.Click += Logout_Click;
+        }
+
+        private void Logout_Click(object sender, EventArgs e)
+        {
+            var intent1 = new Intent(this, typeof(LoginActivity));
+            ActiveUser.Username = null;
+            
+            StartActivity(intent1);
+        }
+
+        private void ProfileBtn_Click(object sender, EventArgs e)
+        {
+            profile.Visibility = Android.Views.ViewStates.Visible;
+            HomePage.Visibility = Android.Views.ViewStates.Gone;
+            EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
+            RetrieveProfile();
+        }
+
+        private void Edit_Click(object sender, EventArgs e)
+        {
             
 
-            BottomNavigationView navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.SetOnNavigationItemSelectedListener(this);
+            AndroidX.AppCompat.App.AlertDialog.Builder editDoorLock = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
+            editDoorLock.SetTitle("Saving Changes");
+            editDoorLock.SetMessage("Are you sure?");
+            editDoorLock.SetPositiveButton("Continue", (deleteAlert, args) =>
+            {
+                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Fullname").SetValue(fullname.Text);
+                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Email").SetValue(email.Text);
+                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Username").SetValue(usernametxt.Text);
+                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Password").SetValue(password.Text);
+                
+                Toast.MakeText(MainActivity.saveEdit.Context, "Changes Saved!", ToastLength.Short).Show();
+                EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
+                profile.Visibility = Android.Views.ViewStates.Gone;
+                HomePage.Visibility = Android.Views.ViewStates.Visible;
+                ActiveUser.Username = usernametxt.Text;
+
+            });
+            editDoorLock.SetNegativeButton("Cancel", (deleteAlert, args) =>
+            {
+                editDoorLock.Dispose();
+            });
+            editDoorLock.Show();
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            profile.Visibility = Android.Views.ViewStates.Gone;
+            HomePage.Visibility = Android.Views.ViewStates.Visible;
         }
 
         private void ConnectEditViews()
@@ -100,7 +207,7 @@ namespace ShareLockRevamp
             });
             editDoorLock.Show();
         }
-
+        
         private void SaveEdit_Click(object sender, EventArgs e)
         {
               string id = MainActivity.doorLockID.Text;
@@ -134,13 +241,14 @@ namespace ShareLockRevamp
 
         private void ConnectHomeViews()
         {
-            HomePage = (LinearLayout)FindViewById(Resource.Id.HomeLayout);
-            doorLockRecyle = (AndroidX.RecyclerView.Widget.RecyclerView)FindViewById(Resource.Id.doorlocksRecyclerView);
-            addDoorLockBtn = (ImageView)FindViewById(Resource.Id.addDoorLock);
+            HomePage = (LinearLayout)FindViewById(Resource.Id.homeLayout);
+            doorLockRecyle = (AndroidX.RecyclerView.Widget.RecyclerView)FindViewById(Resource.Id.doorLockRecycler);
+            addDoorLockBtn = (ImageView)FindViewById(Resource.Id.add);
             addDoorLockBtn.Click += AddDoorLockBtn_Click;
             
         }
-        
+
+
         private void AddDoorLockBtn_Click(object sender, EventArgs e)
         {
             addDoorLockFragment = new AddDoorLockFragment();
@@ -156,30 +264,6 @@ namespace ShareLockRevamp
         }
         
 
-      
-       
-        public bool OnNavigationItemSelected(IMenuItem item)
-        {
-            
-            switch (item.ItemId)
-            {
-                case Resource.Id.navigation_home:
-                    textMessage.SetText(Resource.String.title_home);
-                    HomeExtenders.ShowHomeLayout();
-                    HomeExtenders.RetrieveData();
-
-                    return true;
-                case Resource.Id.navigation_dashboard:
-                    textMessage.SetText(Resource.String.title_dashboard);
-                    
-                    return true;
-                case Resource.Id.navigation_notifications:
-                    textMessage.SetText(Resource.String.title_notifications);
-                    
-                    return true;
-            }
-            return false;
-        }
     }
 }
 

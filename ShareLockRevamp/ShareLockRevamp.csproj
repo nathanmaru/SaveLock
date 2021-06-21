@@ -64,12 +64,12 @@
     <Compile Include="ActiveUser.cs" />
     <Compile Include="Activities\EditDoorLock.cs" />
     <Compile Include="Activities\Extenders\HomeExtenders.cs" />
+    <Compile Include="Activities\Extenders\VisitExtenders.cs" />
     <Compile Include="Activities\GetStartedActivity.cs" />
     <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\SignUpActivity.cs" />
     <Compile Include="Adapters\AllDoorLockAdapter.cs" />
     <Compile Include="Adapters\DoorLockAdapter.cs" />
-    <Compile Include="Adapters\RequestAdapter.cs" />
     <Compile Include="Adapters\YourVisitsAdapter.cs" />
     <Compile Include="EventListeners\AccountListener.cs" />
     <Compile Include="EventListeners\DoorLockListener.cs" />
@@ -83,6 +83,7 @@
     <Compile Include="Models\DoorLock.cs" />
     <Compile Include="Models\DoorLockClick.cs" />
     <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -167,9 +168,6 @@
     <AndroidResource Include="Resources\layout\VisitsPage.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\DoorLockItem.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\SignUpLayout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -199,6 +197,39 @@
     <AndroidResource Include="Resources\layout\SearchItem.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ProfileLayout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\HomeLayout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\addbutton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\backicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\BigLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\deleteButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ProfileLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\searchbutton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\DoorLockItem.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\AccentedButton.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

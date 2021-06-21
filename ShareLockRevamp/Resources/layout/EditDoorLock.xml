@@ -8,6 +8,7 @@
         android:text="Edit DoorLock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#38A3DC"
         android:textSize="25sp"
         android:gravity="center"
         android:id="@+id/textView1" /> 
@@ -15,12 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:hint="Enter Door Lock ID"
         android:id="@+id/doorLockId"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:hint="Enter Door Lock Name"
         android:id="@+id/doorlockName"/>
     <EditText
@@ -28,19 +33,24 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:inputType="textPassword"
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:hint="Enter Door Password"
         android:id="@+id/doorLockPassword"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:hint="Enter Address"
         android:id="@+id/doorLockAddress"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        
+        android:textColorHint="#38A3DC"
+        android:backgroundTint="#38A3DC"
         android:hint="Enter Family/Owner Name"
         android:id="@+id/familyOwner"/>
     <LinearLayout
@@ -56,15 +66,16 @@
         android:text="Save Changes"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        
+        android:textColor="#38A3DC"
         android:layout_marginRight="10dp"
-        android:background="@drawable/myroundedcorners"
+        android:background="@drawable/roundedcornerwhite"
         android:id="@+id/EditDoorLockButton" />
         <Button
         android:text="Delete"
         android:layout_width="150dp"
+        android:textColor="@android:color/white"
         android:layout_height="wrap_content"
-        android:background="@drawable/myroundedcorners"
+        android:background="@drawable/accentedbutton"
         android:id="@+id/DeleteDoorLockButton" />
     </LinearLayout>
 

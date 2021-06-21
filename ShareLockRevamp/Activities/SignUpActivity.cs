@@ -74,24 +74,41 @@ namespace ShareLockRevamp.Activities
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
             //Check Text Fields
-
-            //Check from Existing Account
-            if (CheckExistingAccounts() == 0)
+            if (checkFields() == 0)
             {
-                SignUp();
-                Toast.MakeText(signUpBtn.Context, "Account Created!", ToastLength.Short).Show();
-                var intent = new Intent(this, typeof(MainActivity));
-                
-                ActiveUser.Username = username.Text;
-                intent.PutExtra("userName", username.Text);
-                //pass username through extras
-                StartActivity(intent);
+                if (CheckExistingAccounts() == 0)
+                {
+                    SignUp();
+                    Toast.MakeText(signUpBtn.Context, "Account Created!", ToastLength.Short).Show();
+                    var intent = new Intent(this, typeof(MainActivity));
+
+                    ActiveUser.Username = username.Text;
+                    intent.PutExtra("userName", username.Text);
+                    //pass username through extras
+                    StartActivity(intent);
+                }
+                else
+                {
+                    Toast.MakeText(signUpBtn.Context, "Username or Email already exist!", ToastLength.Short).Show();
+                }
             }
             else
             {
-                Toast.MakeText(signUpBtn.Context, "Username or Email already exist!", ToastLength.Short).Show();
+                Toast.MakeText(signUpBtn.Context, "Don't Leave Fields Empty", ToastLength.Short).Show();
             }
             
+            
+            
+        }
+
+        private int checkFields()
+        {
+            if (username.Text == "") return 1;
+            if (password.Text == "") return 1;
+            if (fullname.Text == "") return 1;
+            if (email.Text == "") return 1;
+
+            return 0;
         }
 
         private void SignUp()

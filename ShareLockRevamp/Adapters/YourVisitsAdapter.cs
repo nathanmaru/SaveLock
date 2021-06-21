@@ -1,4 +1,4 @@
-﻿using Android.Support.V7.Widget;
+﻿using AndroidX.RecyclerView.Widget;
 using Android.Views;
 using Android.Widget;
 using System;
@@ -11,11 +11,16 @@ namespace ShareLockRevamp.Adapters
     {
         public event EventHandler<YourVisitsAdapterClickEventArgs> ItemClick;
         public event EventHandler<YourVisitsAdapterClickEventArgs> ItemLongClick;
+        public event EventHandler<YourVisitsAdapterClickEventArgs> Delete;
         List<Request> items;
 
         public YourVisitsAdapter(List<Request> data)
         {
             items = data;
+        }
+
+        public YourVisitsAdapter()
+        {
         }
 
         // Create new views (invoked by the layout manager)
@@ -27,7 +32,7 @@ namespace ShareLockRevamp.Adapters
             var id = Resource.Layout.YourVisitsItem;
             itemView = LayoutInflater.From(parent.Context).Inflate(id, parent, false);
 
-            var vh = new YourVisitsAdapterViewHolder(itemView, OnClick, OnLongClick);
+            var vh = new YourVisitsAdapterViewHolder(itemView, OnClick, OnLongClick, OnDelete);
             return vh;
         }
 
@@ -49,6 +54,7 @@ namespace ShareLockRevamp.Adapters
 
         void OnClick(YourVisitsAdapterClickEventArgs args) => ItemClick?.Invoke(this, args);
         void OnLongClick(YourVisitsAdapterClickEventArgs args) => ItemLongClick?.Invoke(this, args);
+        void OnDelete(YourVisitsAdapterClickEventArgs args) => Delete?.Invoke(this, args);
 
     }
 
@@ -60,9 +66,10 @@ namespace ShareLockRevamp.Adapters
         public TextView DoorLockName;
         public TextView StatusTxt;
         public TextView Address;
+        public Button DeleteButton;
 
         public YourVisitsAdapterViewHolder(View itemView, Action<YourVisitsAdapterClickEventArgs> clickListener,
-                            Action<YourVisitsAdapterClickEventArgs> longClickListener) : base(itemView)
+                            Action<YourVisitsAdapterClickEventArgs> longClickListener, Action<YourVisitsAdapterClickEventArgs> deleteListener) : base(itemView)
         {
             //TextView = v;
             FamilyName = (TextView)itemView.FindViewById(Resource.Id.familyName);
@@ -70,8 +77,10 @@ namespace ShareLockRevamp.Adapters
             DoorLockName = (TextView)itemView.FindViewById(Resource.Id.DoorLockName);
             StatusTxt = (TextView)itemView.FindViewById(Resource.Id.statusTxt);
             Address = (TextView)itemView.FindViewById(Resource.Id.address);
+            DeleteButton = (Button)itemView.FindViewById(Resource.Id.deleteRequest);
             itemView.Click += (sender, e) => clickListener(new YourVisitsAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
             itemView.LongClick += (sender, e) => longClickListener(new YourVisitsAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
+            DeleteButton.Click += (sender, e) => deleteListener(new YourVisitsAdapterClickEventArgs { View = itemView, Position = AdapterPosition });
         }
     }
 

@@ -30,8 +30,8 @@ namespace ShareLockRevamp.Activities.Extenders
         public static void ShowHomeLayout()
         {
             MainActivity.HomePage.Visibility = Android.Views.ViewStates.Visible;
-            MainActivity.EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
-
+            //MainActivity.EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
+            //MainActivity.VisitLayoutPage.Visibility = Android.Views.ViewStates.Gone;
         }
 
         
@@ -77,7 +77,6 @@ namespace ShareLockRevamp.Activities.Extenders
             MainActivity.doorpassword.Text= filterdoorLockList[e.Position].Password;
             MainActivity.address.Text = filterdoorLockList[e.Position].Address;
             MainActivity.username.Text = filterdoorLockList[e.Position].FamilyName;
-
             MainActivity.EditDoorLayout.Visibility = Android.Views.ViewStates.Visible;
             MainActivity.HomePage.Visibility = Android.Views.ViewStates.Gone;
         }

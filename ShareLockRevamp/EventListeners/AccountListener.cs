@@ -23,6 +23,7 @@ namespace ShareLockRevamp.EventListeners
         {
             public List<Account> Account { get; set; }
         }
+        
         public void OnCancelled(DatabaseError error)
         {
             throw new NotImplementedException();
@@ -34,6 +35,7 @@ namespace ShareLockRevamp.EventListeners
             {
                 var child = snapshot.Children.ToEnumerable<DataSnapshot>();
                 accountList.Clear();
+                
                 foreach (DataSnapshot memberData in child)
                 {
                     Account account = new Account();
@@ -43,8 +45,18 @@ namespace ShareLockRevamp.EventListeners
                     account.Email = memberData.Child("Email").Value.ToString();
                     account.Password = memberData.Child("Password").Value.ToString();
                     accountList.Add(account);
+                    if(memberData.Child("Username").Value.ToString() == ActiveUser.Username)
+                    {
+
+                        ActiveUser.ID = memberData.Key;
+                        ActiveUser.Fullname = memberData.Child("Fullname").Value.ToString();
+                        ActiveUser.Email = memberData.Child("Email").Value.ToString();
+                        ActiveUser.Password = memberData.Child("Password").Value.ToString();
+                        
+                    }
                 }
                 AccountRetrived.Invoke(this, new AccountDataEventArgs { Account = accountList });
+                
             }
         }
         public void Create()

@@ -19,7 +19,7 @@
             android:minHeight="80dp"
             android:id="@+id/logoImage" />
         <TextView
-            android:text="ShareLock"
+            android:text="SaveLocks"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
