@@ -11,10 +11,11 @@
         android:gravity="center"
         android:id="@+id/linearLayout1" >
         <ImageView
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:src="@drawable/biglogo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
+            android:layout_marginRight="10dp"
             android:minWidth="80dp"
             android:minHeight="80dp"
             android:id="@+id/logoImage" />
@@ -22,6 +23,7 @@
             android:text="SaveLocks"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="#38A3DC"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -31,7 +33,7 @@
 
     </LinearLayout>
     <ImageView
-        android:src="@android:drawable/ic_menu_gallery"
+        android:src="@drawable/illustration"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:id="@+id/imageView1" />
@@ -42,6 +44,7 @@
         android:textStyle="bold"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="#38A3DC"
         android:gravity="center"
         android:layout_marginBottom="15dp"
         android:id="@+id/textView2" />
@@ -49,7 +52,7 @@
         android:text="Experience managing your home doors at your own hands"
         android:layout_width="match_parent"
         android:textSize="18dp"
-        
+        android:textColor="#38A3DC"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
@@ -59,10 +62,9 @@
         android:text="Get Started"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:shadowColor="@android:color/transparent"
-        android:elevation="0dp"
+        android:textColor="@android:color/white"
         android:layout_gravity="center"
-        android:background="@drawable/myroundedcorners"
+        android:background="@drawable/accentedbutton"
         android:id="@+id/getstartedBtn" />
     <RelativeLayout
         android:orientation="horizontal"

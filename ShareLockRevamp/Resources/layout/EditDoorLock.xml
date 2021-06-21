@@ -32,7 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:inputType="textPassword"
         android:textColorHint="#38A3DC"
         android:backgroundTint="#38A3DC"
         android:hint="Enter Door Password"
