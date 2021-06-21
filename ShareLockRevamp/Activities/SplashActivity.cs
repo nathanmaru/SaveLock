@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ShareLockRevamp.Activities
 {
-    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
+    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true, Icon ="@mipmap/lock_SaveIcon")]
     public class SplashActivity : AppCompatActivity
     {
         static readonly string TAG = "X:" + typeof(SplashActivity).Name;
