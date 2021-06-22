@@ -76,7 +76,7 @@ namespace ShareLockRevamp.Activities
             //Check Text Fields
             if (checkFields() == 0)
             {
-                if (CheckExistingAccounts() == 0)
+                if (CheckExistingUserName() == 0 && CheckExistingEmails() == 0)
                 {
                     SignUp();
                     Toast.MakeText(signUpBtn.Context, "Account Created!", ToastLength.Short).Show();
@@ -128,12 +128,19 @@ namespace ShareLockRevamp.Activities
             newUserRef.SetValue(userInfo);
         }
 
-        private int CheckExistingAccounts()
+        public int CheckExistingUserName()
         {
             List<Account> SearchResult =
                 (from account in AccountList
-                 where account.Username.Contains(username.Text) ||
-                 account.Email.Contains(email.Text)
+                 where account.Username.Contains(username.Text) 
+                 select account).ToList();
+            return SearchResult.Count;
+        }
+        public int CheckExistingEmails()
+        {
+            List<Account> SearchResult =
+                (from account in AccountList
+                 where account.Email.Contains(email.Text)
                  select account).ToList();
             return SearchResult.Count;
         }

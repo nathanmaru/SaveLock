@@ -149,30 +149,54 @@ namespace ShareLockRevamp
 
         private void Edit_Click(object sender, EventArgs e)
         {
-            
-
-            AndroidX.AppCompat.App.AlertDialog.Builder editDoorLock = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
-            editDoorLock.SetTitle("Saving Changes");
-            editDoorLock.SetMessage("Are you sure?");
-            editDoorLock.SetPositiveButton("Continue", (deleteAlert, args) =>
+            SignUpActivity signUpActivity = new SignUpActivity();
+            if (signUpActivity.CheckExistingUserName() == 0)
             {
-                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Fullname").SetValue(fullname.Text);
-                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Email").SetValue(email.Text);
-                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Username").SetValue(usernametxt.Text);
-                AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Password").SetValue(password.Text);
-                
-                Toast.MakeText(MainActivity.saveEdit.Context, "Changes Saved!", ToastLength.Short).Show();
-                EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
-                profile.Visibility = Android.Views.ViewStates.Gone;
-                HomePage.Visibility = Android.Views.ViewStates.Visible;
-                ActiveUser.Username = usernametxt.Text;
+                if (CheckEmptyFields() == 0)
+                {
+                    AndroidX.AppCompat.App.AlertDialog.Builder editDoorLock = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
+                    editDoorLock.SetTitle("Saving Changes");
+                    editDoorLock.SetMessage("Are you sure?");
+                    editDoorLock.SetPositiveButton("Continue", (deleteAlert, args) =>
+                    {
+                        AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Fullname").SetValue(fullname.Text);
+                        AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Email").SetValue(email.Text);
+                        AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Username").SetValue(usernametxt.Text);
+                        AppDataHelper.GetDatabase().GetReference("accountInfo/" + ActiveUser.ID + "/Password").SetValue(password.Text);
 
-            });
-            editDoorLock.SetNegativeButton("Cancel", (deleteAlert, args) =>
+                        Toast.MakeText(MainActivity.saveEdit.Context, "Changes Saved!", ToastLength.Short).Show();
+                        EditDoorLayout.Visibility = Android.Views.ViewStates.Gone;
+                        profile.Visibility = Android.Views.ViewStates.Gone;
+                        HomePage.Visibility = Android.Views.ViewStates.Visible;
+                        ActiveUser.Username = usernametxt.Text;
+
+                    });
+                    editDoorLock.SetNegativeButton("Cancel", (deleteAlert, args) =>
+                    {
+                        editDoorLock.Dispose();
+                    });
+                    editDoorLock.Show();
+                }
+                else
+                {
+                    Toast.MakeText(MainActivity.saveEdit.Context, "Don't leave empty field!", ToastLength.Short).Show();
+                }
+            }
+            else
             {
-                editDoorLock.Dispose();
-            });
-            editDoorLock.Show();
+                Toast.MakeText(MainActivity.saveEdit.Context, "Username already taken!", ToastLength.Short).Show();
+            }
+
+
+        }
+        
+        private int CheckEmptyFields()
+        {
+            if (fullname.Text == "" || fullname.Text == null) return 1;
+            if (usernametxt.Text == "" || usernametxt.Text == null) return 1;
+            if (email.Text == "" || email.Text == null) return 1;
+            if (password.Text == "" || password.Text == null) return 1;
+            return 0;
         }
 
         private void Back_Click(object sender, EventArgs e)
@@ -219,7 +243,7 @@ namespace ShareLockRevamp
         
         private void SaveEdit_Click(object sender, EventArgs e)
         {
-              string id = MainActivity.doorLockID.Text;
+                string id = MainActivity.doorLockID.Text;
                 string doorname = MainActivity.doorLockName.Text;
                 string password = MainActivity.doorpassword.Text;
                 string address = MainActivity.address.Text;

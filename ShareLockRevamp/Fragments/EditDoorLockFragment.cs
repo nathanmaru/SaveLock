@@ -68,15 +68,11 @@ namespace ShareLockRevamp.Fragments
             string password = Password.Text;
             string address = Address.Text;
             string ownername = OwnerName.Text;
-            //also pass home id
-
-            //Do something to Retrieve FullName
-            //RetrieveFullName();
-
+           
 
 
             AndroidX.AppCompat.App.AlertDialog.Builder dialog = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
-            dialog.SetTitle("Adding DoorLock");
+            dialog.SetTitle("Editing DoorLock");
             dialog.SetMessage("Are you sure?");
             dialog.SetPositiveButton("Continue", (senderAlert, args) =>
             {

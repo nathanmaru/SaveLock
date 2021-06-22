@@ -18,7 +18,7 @@
             android:layout_gravity="center"
             android:id="@+id/logoImage" />
         <TextView
-            android:text="ShareLock"
+            android:text="SaveLock"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#38A3DC"

@@ -71,7 +71,7 @@ namespace ShareLockRevamp.Activities
                 //Check from Existing Account
             if (CheckExistingAccounts() >= 1)
             {
-                LogIn();
+                
                 Toast.MakeText(loginBtn.Context, "Login Success!", ToastLength.Short).Show();
                 var intent1 = new Intent(this, typeof(MainActivity));
                 ActiveUser.Username = username.Text;
@@ -114,9 +114,6 @@ namespace ShareLockRevamp.Activities
 
         }
 
-        private void LogIn()
-        {
-            
-        }
+        
     }
 }

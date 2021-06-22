@@ -52,40 +52,55 @@ namespace ShareLockRevamp.Fragments
 
         private void Addbtn_Click(object sender, EventArgs e)
         {
-            string doorId = DoorId.Text;
-            string doorName = Doorname.Text;
-            string password = Password.Text;
-            string address = Address.Text;
-            string ownername = OwnerName.Text;
-            //also pass home id
-
-            //Do something to Retrieve FullName
-            //RetrieveFullName();
-
-            HashMap doorlockInfo = new HashMap();
-            doorlockInfo.Put("Key", doorId); 
-            doorlockInfo.Put("DoorName", doorName);
-            doorlockInfo.Put("Password", password);
-            doorlockInfo.Put("Username", ActiveUser.Username);
-            doorlockInfo.Put("Address", address);
-            doorlockInfo.Put("FamilyName", ownername);
-            doorlockInfo.Put("OTP", "not set");
-
-            AndroidX.AppCompat.App.AlertDialog.Builder dialog = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
-            dialog.SetTitle("Adding DoorLock");
-            dialog.SetMessage("Are you sure?");
-            dialog.SetPositiveButton("Continue", (senderAlert, args) =>
+            if (CheckEmptyFields() == 0)
             {
-                DatabaseReference newNoteRef = AppDataHelper.GetDatabase().GetReference("doorLockInfo").Push();
-                newNoteRef.SetValue(doorlockInfo);
-                Toast.MakeText(Addbtn.Context, "DoorLock Added!", ToastLength.Short).Show();
-                this.Dismiss();
-            });
-            dialog.SetNegativeButton("Cancel", (senderAlert, args) =>
+                string doorId = DoorId.Text;
+                string doorName = Doorname.Text;
+                string password = Password.Text;
+                string address = Address.Text;
+                string ownername = OwnerName.Text;
+
+                HashMap doorlockInfo = new HashMap();
+                doorlockInfo.Put("Key", doorId);
+                doorlockInfo.Put("DoorName", doorName);
+                doorlockInfo.Put("Password", password);
+                doorlockInfo.Put("Username", ActiveUser.Username);
+                doorlockInfo.Put("Address", address);
+                doorlockInfo.Put("FamilyName", ownername);
+                doorlockInfo.Put("OTP", "not set");
+
+                AndroidX.AppCompat.App.AlertDialog.Builder dialog = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
+                dialog.SetTitle("Adding DoorLock");
+                dialog.SetMessage("Are you sure?");
+                dialog.SetPositiveButton("Continue", (senderAlert, args) =>
+                {
+                    DatabaseReference newNoteRef = AppDataHelper.GetDatabase().GetReference("doorLockInfo").Push();
+                    newNoteRef.SetValue(doorlockInfo);
+                    Toast.MakeText(Addbtn.Context, "DoorLock Added!", ToastLength.Short).Show();
+                    this.Dismiss();
+                });
+                dialog.SetNegativeButton("Cancel", (senderAlert, args) =>
+                {
+                    dialog.Dispose();
+                });
+                dialog.Show();
+            }
+            else
             {
-                dialog.Dispose();
-            });
-            dialog.Show();
+                Toast.MakeText(Addbtn.Context, "Don't leave empty fields!", ToastLength.Short).Show();
+            }
+            
+        }
+
+        private int CheckEmptyFields()
+        {
+            if (DoorId.Text == "" || DoorId.Text == null) return 1;
+            if (Doorname.Text == "" || Doorname.Text == null) return 1;
+            if (Password.Text == "" || Password.Text == null) return 1;
+            if (Address.Text == "" || Address.Text == null) return 1;
+            if (OwnerName.Text == "" || OwnerName.Text == null) return 1;
+
+            return 0;
         }
     }
 }
