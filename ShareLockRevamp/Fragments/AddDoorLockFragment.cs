@@ -14,6 +14,7 @@ using System.Text;
 using Firebase.Database;
 using ShareLockRevamp.Helpers;
 using ShareLockRevamp.Models;
+using ShareLockRevamp.EventListeners;
 
 namespace ShareLockRevamp.Fragments
 {
@@ -26,6 +27,8 @@ namespace ShareLockRevamp.Fragments
         EditText OwnerName;
         Button Addbtn;
         //ActiveUser activeusername;
+        DoorLockStockListener stockListener;
+        List<Stock> stockList;
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -54,42 +57,92 @@ namespace ShareLockRevamp.Fragments
         {
             if (CheckEmptyFields() == 0)
             {
-                string doorId = DoorId.Text;
-                string doorName = Doorname.Text;
-                string password = Password.Text;
-                string address = Address.Text;
-                string ownername = OwnerName.Text;
-
-                HashMap doorlockInfo = new HashMap();
-                doorlockInfo.Put("Key", doorId);
-                doorlockInfo.Put("DoorName", doorName);
-                doorlockInfo.Put("Password", password);
-                doorlockInfo.Put("Username", ActiveUser.Username);
-                doorlockInfo.Put("Address", address);
-                doorlockInfo.Put("FamilyName", ownername);
-                doorlockInfo.Put("OTP", "not set");
-
-                AndroidX.AppCompat.App.AlertDialog.Builder dialog = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
-                dialog.SetTitle("Adding DoorLock");
-                dialog.SetMessage("Are you sure?");
-                dialog.SetPositiveButton("Continue", (senderAlert, args) =>
+                if(CheckIfDoorID() == 0)
                 {
-                    DatabaseReference newNoteRef = AppDataHelper.GetDatabase().GetReference("doorLockInfo").Push();
-                    newNoteRef.SetValue(doorlockInfo);
-                    Toast.MakeText(Addbtn.Context, "DoorLock Added!", ToastLength.Short).Show();
-                    this.Dismiss();
-                });
-                dialog.SetNegativeButton("Cancel", (senderAlert, args) =>
+                    string doorId = DoorId.Text;
+                    string doorName = Doorname.Text;
+                    string password = Password.Text;
+                    string address = Address.Text;
+                    string ownername = OwnerName.Text;
+
+                    HashMap doorlockInfo = new HashMap();
+                    doorlockInfo.Put("Key", doorId);
+                    doorlockInfo.Put("DoorName", doorName);
+                    doorlockInfo.Put("Password", password);
+                    doorlockInfo.Put("Username", ActiveUser.Username);
+                    doorlockInfo.Put("Address", address);
+                    doorlockInfo.Put("FamilyName", ownername);
+                    doorlockInfo.Put("OTP", "not set");
+
+                    AndroidX.AppCompat.App.AlertDialog.Builder dialog = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
+                    dialog.SetTitle("Adding DoorLock");
+                    dialog.SetMessage("Are you sure?");
+                    dialog.SetPositiveButton("Continue", (senderAlert, args) =>
+                    {
+                        DatabaseReference newNoteRef = AppDataHelper.GetDatabase().GetReference("doorLockInfo").Push();
+                        newNoteRef.SetValue(doorlockInfo);
+                        ModifyStock();
+                        Toast.MakeText(Addbtn.Context, "DoorLock Added!", ToastLength.Short).Show();
+                        this.Dismiss();
+                    });
+                    dialog.SetNegativeButton("Cancel", (senderAlert, args) =>
+                    {
+                        dialog.Dispose();
+                    });
+                    dialog.Show();
+                }
+                else
                 {
-                    dialog.Dispose();
-                });
-                dialog.Show();
+                    Toast.MakeText(Addbtn.Context, "DoorLockId is Invalid!", ToastLength.Short).Show();
+                }
+                
             }
             else
             {
                 Toast.MakeText(Addbtn.Context, "Don't leave empty fields!", ToastLength.Short).Show();
             }
             
+        }
+
+        private void ModifyStock()
+        {
+            AppDataHelper.GetDatabase().GetReference("doorlocks/" + DoorId.Text + "/Fullname").SetValue("Sold");
+        }
+
+        private int CheckIfDoorID()
+        {
+            RetrieveStocks();
+            if (CheckIfAvailable() == 1)
+            {
+                return 0;
+            }
+            else 
+            { 
+                return 1; 
+            }
+            
+            
+        }
+
+        private int CheckIfAvailable()
+        {
+            List<Stock> SearchResult = (from stock in stockList
+                                          where stock.ID == DoorId.Text &&
+                                          stock.Status == "Available"
+                                          select stock).ToList();
+            return SearchResult.Count;
+        }
+
+        private void RetrieveStocks()
+        {
+            stockListener = new DoorLockStockListener();
+            stockListener.Create();
+            stockListener.StockRetrived += StockListener_StockRetrived;
+        }
+
+        private void StockListener_StockRetrived(object sender, DoorLockStockListener.StockDataEventArgs e)
+        {
+            stockList = e.Stock;
         }
 
         private int CheckEmptyFields()

@@ -24,8 +24,7 @@ namespace ShareLockRevamp.Activities.Extenders
 
         public static List<DoorLock> doorLockList;
         public static List<DoorLock> filterdoorLockList;
-        DoorLock thisDoorLock;
-        DoorLockListener DoorLockListener;
+        
         
 
         public static void ShowHomeLayout()

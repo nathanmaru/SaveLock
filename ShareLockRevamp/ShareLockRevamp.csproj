@@ -79,6 +79,7 @@
     <Compile Include="Adapters\DoorLockAdapter.cs" />
     <Compile Include="EventListeners\AccountListener.cs" />
     <Compile Include="EventListeners\DoorLockListener.cs" />
+    <Compile Include="EventListeners\DoorLockStockListener.cs" />
     <Compile Include="Fragments\AddDoorLockFragment.cs" />
     <Compile Include="Fragments\AddVisitFragment.cs" />
     <Compile Include="Fragments\EditDoorLockFragment.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\DoorLock.cs" />
     <Compile Include="Models\DoorLockClick.cs" />
+    <Compile Include="Models\Stock.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
