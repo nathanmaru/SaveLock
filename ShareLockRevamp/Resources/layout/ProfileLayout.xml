@@ -55,6 +55,7 @@
         android:textColorHint="#38A3DC"
         android:backgroundTint="#38A3DC"
         android:layout_marginTop="15dp"
+        android:inputType="textEmailAddress"
         android:id="@+id/emailText"
         android:hint="Email Address"/>
     <EditText

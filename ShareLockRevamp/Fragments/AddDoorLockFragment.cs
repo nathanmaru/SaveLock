@@ -106,7 +106,7 @@ namespace ShareLockRevamp.Fragments
 
         private void ModifyStock()
         {
-            AppDataHelper.GetDatabase().GetReference("doorlocks/" + DoorId.Text + "/Fullname").SetValue("Sold");
+            AppDataHelper.GetDatabase().GetReference("doorlocks/" + DoorId.Text + "/Status").SetValue("Sold");
         }
 
         private int CheckIfDoorID()
@@ -117,7 +117,8 @@ namespace ShareLockRevamp.Fragments
                 return 0;
             }
             else 
-            { 
+            {
+                Toast.MakeText(Addbtn.Context, "DoorLockId is Invalid!", ToastLength.Short).Show();
                 return 1; 
             }
             
@@ -126,11 +127,20 @@ namespace ShareLockRevamp.Fragments
 
         private int CheckIfAvailable()
         {
-            List<Stock> SearchResult = (from stock in stockList
-                                          where stock.ID == DoorId.Text &&
-                                          stock.Status == "Available"
-                                          select stock).ToList();
-            return SearchResult.Count;
+            try
+            {
+                List<Stock> SearchResult = (from stock in stockList
+                                            where stock.ID == DoorId.Text &&
+                                            stock.Status == "Available"
+                                            select stock).ToList();
+                return SearchResult.Count;
+            }
+            catch (ArgumentNullException ex)
+            {
+                return -1;
+            }
+            
+            
         }
 
         private void RetrieveStocks()

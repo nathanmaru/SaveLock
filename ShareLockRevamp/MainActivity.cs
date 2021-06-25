@@ -23,7 +23,7 @@ using System.Linq;
 
 namespace ShareLockRevamp
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme")]
+    [Activity(Label = "MainActivity", Theme = "@style/AppTheme")]
     public class MainActivity : AppCompatActivity
     {
         
@@ -179,7 +179,7 @@ namespace ShareLockRevamp
                 }
                 else
                 {
-                    Toast.MakeText(MainActivity.saveEdit.Context, "Don't leave empty field!", ToastLength.Short).Show();
+                    Toast.MakeText(MainActivity.saveEdit.Context, "Invalid fields!", ToastLength.Short).Show();
                 }
             }
             else
@@ -196,6 +196,12 @@ namespace ShareLockRevamp
             if (usernametxt.Text == "" || usernametxt.Text == null) return 1;
             if (email.Text == "" || email.Text == null) return 1;
             if (password.Text == "" || password.Text == null) return 1;
+            if (!email.Text.Contains("@"))
+            {
+                Toast.MakeText(MainActivity.saveEdit.Context, "Invalid Email Input!", ToastLength.Short).Show();
+                return 1;
+            }
+            
             return 0;
         }
 

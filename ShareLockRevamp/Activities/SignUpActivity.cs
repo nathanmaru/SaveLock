@@ -83,7 +83,7 @@ namespace ShareLockRevamp.Activities
                     var intent = new Intent(this, typeof(MainActivity));
 
                     ActiveUser.Username = username.Text;
-                    intent.PutExtra("userName", username.Text);
+                    
                     //pass username through extras
                     StartActivity(intent);
                 }
@@ -94,7 +94,7 @@ namespace ShareLockRevamp.Activities
             }
             else
             {
-                Toast.MakeText(signUpBtn.Context, "Don't Leave Fields Empty", ToastLength.Short).Show();
+                Toast.MakeText(signUpBtn.Context, "Input Fields Invalid", ToastLength.Short).Show();
             }
             
             
@@ -107,6 +107,11 @@ namespace ShareLockRevamp.Activities
             if (password.Text == "") return 1;
             if (fullname.Text == "") return 1;
             if (email.Text == "") return 1;
+            if (!email.Text.Contains("@"))
+            {
+                Toast.MakeText(signUpBtn.Context, "Invalid Email Input!", ToastLength.Short).Show();
+                return 1;
+            } 
 
             return 0;
         }
